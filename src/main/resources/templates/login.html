@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+
+    <style>
+      /* Bakgrund */
+     /*  body {
+        background-color: #ffdde4;
+      } */
+
+      /* Formulär */
+      .container {
+        background-color: #fff;
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Rubrik */
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      /* Inputfält */
+      .form-control {
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 5px;
+      }
+
+      /* Placeholder för inputfält */
+      .form-control::placeholder {
+        color: #ccc;
+      }
+
+      /* Submit-knapp */
+      .btn-register {
+        border-radius: 25px;
+        background-color: #deb3e0;
+        border-color: #deb3e0;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .btn-register:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+      /* header */
+      header {
+        background-color: #9bb8ed;
+        padding: 20px;
+      }
+      nav {
+        position: absolute; /* Lägg till position: absolute; */
+        top: 0;
+        right: 0;
+        left: 0;
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 90px;
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      nav ul li {
+        margin: 0 10px;
+        font-size: 18px;
+      }
+
+      nav ul li a {
+        color: #333;
+        text-decoration: none;
+      }
+
+      nav ul li a:hover {
+        color: #f00;
+      }
+      nav img {
+        height: 80px; /* Anpassa höjden till navbarens höjd */
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <header>
+      <nav>
+        <img
+          th:src="@{/static/images/rats3.jpg}"
+          alt="Logo"
+        />
+        <ul>
+          <li th:if="${isLoggedIn}">
+            <a th:href="@{/user}">Användarsida</a>
+          </li>
+          <li th:if="${isLoggedIn}"><a th:href="@{/logout}">Logga ut</a></li>
+          <li th:unless="${isLoggedIn}">
+            <a th:href="@{/register}">Registrera</a>
+          
+        </ul>
+      </nav>
+    </header> -->
+    <header>
+      <nav>
+        <img th:src="@{/static/images/rats3.jpg}" alt="Logo" />
+        <ul>
+          <li><a th:href="@{/register}">Registrera</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container text-center">
+      <form th:action="@{/login}" method="post">
+        <h3>Log in</h3>
+        <!-- Show Error -->
+        <div th:if="${param.error}">
+          <p class="text-danger">
+            [[ ${session.SPRING_SECURITY_LAST_EXCEPTION.message} ]]
+          </p>
+        </div>
+
+        <!-- On Logout -->
+        <div th:if="${param.logout}">
+          <p class="text-info">You have been logged out.</p>
+        </div>
+
+        <div class="">
+          <!-- Username Input -->
+          <div class="">
+            <input
+              name="username"
+              placeholder="username here..."
+              type="text"
+              class="form-control"
+              required
+              autofocus
+            />
+          </div>
+
+          <!-- Password Input -->
+          <div>
+            <input
+              name="password"
+              placeholder="password here..."
+              type="password"
+              class="form-control"
+              required
+              autofocus
+            />
+          </div>
+
+          <!-- Checkbox Remember-me Input -->
+          <div>
+            <input name="remember-me" type="checkbox" />&nbsp;Remember Me
+          </div>
+
+          <!-- Submit -->
+          <div>
+            <input type="submit" value="Login"  class="btn btn-primary btn-register mt-4"/>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

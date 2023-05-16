@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rat Treatments</title>
+</head>
+<body>
+    <h1>Treatments for rat <span th:text="${rat.name}"></span></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Diagnosis</th>
+                <th>Medication</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="diagnosis : ${rat.diagnoses}">
+                <td th:text="${diagnosis?.name}">Diagnosis</td>
+                <td th:text="${diagnosis?.medication}">Medication</td>
+                <td><a th:href="@{/rats/{id}/edit-diagnosis/{diagnosisId}(id=${rat.id}, diagnosisId=${diagnosis.id})}">Edit</a></td>
+                <td><a th:href="@{/rats/{id}/delete-diagnosis/{diagnosisId}(id=${rat.id}, diagnosisId=${diagnosis.id})}">Delete</a></td>
+              </tr>
+        </tbody>
+    </table>
+</body>
+</html>

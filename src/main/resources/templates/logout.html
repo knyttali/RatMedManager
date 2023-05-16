@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <th:include th:src="@{header :: header}"></th:include>
+    <style>
+      /* Header */
+      header {
+        background-color: #f4e6d7;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+      }
+
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+      }
+
+      nav ul li {
+        margin: 0 10px;
+        font-size: 18px;
+      }
+
+      nav ul li a {
+        color: #333;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      nav ul li a:hover {
+        color: #fff;
+        background-color: #9bb8ed;
+      }
+
+      img {
+        height: 100px;
+        width: auto;
+      }
+
+      /* Main */
+      .container {
+        margin: 50px auto;
+        max-width: 800px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: #9bb8ed;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 18px;
+      }
+
+      .btn:hover {
+        background-color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid text-center">
+      <!-- IS IT A POST? -->
+      <p>DO YOU WANT TO LOGOUT?</p>
+
+      <form method="post" th:action="@{/logout}">
+        <input type="submit" value="Logout" />
+      </form>
+    </div>
+  </body>
+</html>

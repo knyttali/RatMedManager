@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Min hemsida</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img th:src="@{/static/images/rats3.jpg}" alt="Logo" />
+        <ul>
+          <li class="home-btn active"><a>Hem</a></li>
+          <li class="myrats-btn">
+            <a>Mina Råttor</a>
+          </li>
+          <li class="addrat-btn">
+            <a>Lägg till råtta</a>
+          </li>
+          <li><a th:href="@{/logout}">Logga ut</a></li>
+        </ul>
+      </nav>
+    </header>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <style>
+      /* Bakgrund */
+
+      /* Formulär */
+      .container {
+        background-color: #fff;
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 30px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Rubrik */
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      /* Inputfält */
+      .form-control {
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #ccc;
+      }
+      #role {
+        margin-top: 5px;
+      }
+
+      /* Placeholder för inputfält */
+      .form-control::placeholder {
+        color: #ccc;
+      }
+
+      /* Submit-knapp */
+      .btn-register {
+        border-radius: 25px;
+        background-color: #DEB3E0;
+        border-color: #DEB3E0;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .btn-register:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+     
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img th:src="@{/static/images/rats3.jpg}" alt="Logo" />
+        <ul>
+          <li><a th:href="@{/login}">Logga in</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <form th:action="@{/register}" th:object="${userModel}" method="post">
+        <h3 class="text-center">Register</h3>
+        <!-- Username Input -->
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input
+            th:field="*{username}"
+            type="text"
+            placeholder="write your username here..."
+            id="username"
+            class="form-control"
+          />
+
+          <!-- Display SINGULAR error -->
+          <p
+            th:if="${ #fields.hasErrors('username') }"
+            th:errors="*{username}"
+            th:errorclass="error text-danger"
+            class="mt-1"
+          ></p>
+        </div>
+
+        <!-- Password Input -->
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            th:field="*{password}"
+            type="password"
+            placeholder="write your password here..."
+            id="password"
+            class="form-control"
+          />
+        </div>
+
+        <!-- Role Input -->
+        <div class="form-group">
+          <label for="role">Role:</label>
+          <select th:field="*{authorities}" id="role" class="form-control">
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+        </div>
+
+        <!-- Display Password Errors -->
+        <div>
+          <ul>
+            <li
+              th:each="error : ${#fields.errors('password')}"
+              th:text="${error}"
+              class="error text-danger"
+            ></li>
+          </ul>
+        </div>
+
+        <!-- Register Button -->
+        <div>
+          <input
+            type="submit"
+            value="Register"
+            class="btn btn-primary btn-register mt-4"
+          />
+        </div>
+      </form>
+    </div>
+    <!-- Bootstrap JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmIa0WvoETK8Va8W2I2w"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

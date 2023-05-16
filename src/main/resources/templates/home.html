@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Homepage</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <div th:replace="~{header :: header}"></div>
+    <main>
+      <section class="main-section">
+        <h1>Välkommen!</h1>
+      </section>
+      <section class="myrats-section hidden">
+        <h1>Mina Råttor</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Namn</th>
+              <th>Ålder</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="rat : ${ratList}">
+              <td th:text="${rat.name}"></td>
+              <td th:text="${rat.age}"></td>
+              <td>
+                <button th:data-url="@{/rat/{id}(id=${rat.id})}"
+                        class="goto-rat-btn">Gå till {{rat.name}}</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="add-rat-section hidden">
+        <h1>Add Rat</h1>
+        <form
+          action="#"
+          th:action="@{/add-rat}"
+          th:object="${rat}"
+          method="post"
+        >
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" th:field="*{name}" />
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" th:field="*{age}" />
+          <button type="submit">Add Rat</button>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2023 RatMedManager. All rights reserved.</p>
+    </footer>
+    <script src="/static/js/script.js"></script>
+  </body>
