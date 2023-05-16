@@ -16,51 +16,53 @@ $(document).ready(function () {
       },
     });
   });
-});
 
+  // Hämta referensen till elementen
+  var overlay = $(".overlay");
+  var overlayContent = $(".overlay-content");
+  var gotoRatBtn = $(".goto-rat-btn");
 
+  // Göm overlay som standard
+  overlay.hide();
 
+  // Klickhändelse för att visa den synliga rutan
+  gotoRatBtn.click(function () {
+    overlay.show();
+  });
 
-/* flytta hidden klassen */
-// Hämta elementen som behöver manipuleras
-const myRatsLinks = document.querySelectorAll(".myrats-btn");
-const homeLinks = document.querySelectorAll(".home-btn");
-const addRatLinks = document.querySelectorAll(".addrat-btn");
-const myRatsSection = document.querySelector(".myrats-section");
-const mainSection = document.querySelector(".main-section");
-const addRatSection = document.querySelector(".add-rat-section");
+  // Klickhändelse för att gömma den synliga rutan när man klickar på det synliga området
+  overlay.click(function (event) {
+    if (event.target === overlay[0]) {
+      overlay.hide();
+    }
+  });
 
-myRatsLinks.forEach(link => {
-  link.addEventListener("click", () => toggleSections(link));
-});
-homeLinks.forEach(link => {
-  link.addEventListener("click", () => toggleSections(link));
-});
-addRatLinks.forEach(link => {
-  link.addEventListener("click", () => toggleSections(link));
-});
+  // Klickhändelse för att byta sektioner
+  $(".myrats-btn, .home-btn, .addrat-btn, .logout-btn-link").click(function () {
+    toggleSections(this);
+  });
 
-function toggleSections(clickedLink) {
-  // remove "active" class from all links
-  myRatsLinks.forEach(link => link.classList.remove("active"));
-  homeLinks.forEach(link => link.classList.remove("active"));
-  addRatLinks.forEach(link => link.classList.remove("active"));
+  function toggleSections(clickedLink) {
+    // Ta bort "active" klass från alla länkar
+    $(".myrats-btn, .home-btn, .addrat-btn, .logout-btn-link").removeClass(
+      "active"
+    );
 
-  // add "active" class to clicked link
-  clickedLink.classList.add("active");
+    // Lägg till "active" klass på klickad länk
+    $(clickedLink).addClass("active");
 
-  // hide all sections and show the one for the clicked link
-  if (clickedLink.classList.contains("myrats-btn")) {
-    myRatsSection.classList.remove("hidden");
-    mainSection.classList.add("hidden");
-    addRatSection.classList.add("hidden");
-  } else if (clickedLink.classList.contains("home-btn")) {
-    myRatsSection.classList.add("hidden");
-    mainSection.classList.remove("hidden");
-    addRatSection.classList.add("hidden");
-  } else if (clickedLink.classList.contains("addrat-btn")) {
-    myRatsSection.classList.add("hidden");
-    mainSection.classList.add("hidden");
-    addRatSection.classList.remove("hidden");
+    // Göm alla sektioner och visa den valda sektionen baserat på länkens klass
+    $(
+      ".myrats-section, .main-section, .add-rat-section, .logout-section"
+    ).addClass("hidden");
+    if ($(clickedLink).hasClass("myrats-btn")) {
+      $(".myrats-section").removeClass("hidden");
+    } else if ($(clickedLink).hasClass("home-btn")) {
+      $(".main-section").removeClass("hidden");
+    } else if ($(clickedLink).hasClass("addrat-btn")) {
+      $(".add-rat-section").removeClass("hidden");
+    } else if ($(clickedLink).hasClass("logout-btn-link")) {
+      $(".logout-section").removeClass("hidden");
+    }
   }
-}
+});

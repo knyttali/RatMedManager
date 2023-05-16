@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Homepage</title>
+    <title>RatMedManager</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
@@ -48,9 +48,20 @@
           <button type="submit">Add Rat</button>
         </form>
       </section>
+      <section class="logout-section hidden">
+          <h1>Vill du logga ut?</h1>
+  
+          <form method="post" th:action="@{/logout}">
+            <input type="submit" value="Logout" />
+          </form>
+      </section>
     </main>
-    <footer>
-      <p>&copy; 2023 RatMedManager. All rights reserved.</p>
-    </footer>
+    <div th:replace="~{footer :: footer}"></div>
+    <!-- råttans profil -->
+    <div class="overlay">
+      <div class="overlay-content">
+        <h2>råttans profil</h2>
+      </div>
+    </div>
     <script src="/static/js/script.js"></script>
   </body>

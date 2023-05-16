@@ -2,6 +2,13 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin: 0; 
+  padding: 0;
+}
+main, footer {
+  display: flex;
+  justify-content: center; /* Horisontell centrering */
+  align-items: center; /* Vertikal centrering */
 }
 main {
   flex-grow: 1; /* make the main section expand to fill remaining space */
@@ -58,3 +65,24 @@ nav a:hover {
 .active {
   text-decoration: underline;
 }
+
+/* popup råttans profil */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Centrera horisontellt */
+  align-items: center; /* Centrera vertikalt */
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+
+.overlay-content {
+  padding: 20px;
+  background-color: #ffffff;
+}
+

@@ -65,48 +65,7 @@
         background-color: #0069d9;
         border-color: #0062cc;
       }
-      /* header */
-      header {
-        background-color: #9bb8ed;
-        padding: 20px;
-      }
-      nav {
-        position: absolute; /* Lägg till position: absolute; */
-        top: 0;
-        right: 0;
-        left: 0;
-        background-color: #fff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 90px;
-      }
-
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: flex-end;
-      }
-
-      nav ul li {
-        margin: 0 10px;
-        font-size: 18px;
-      }
-
-      nav ul li a {
-        color: #333;
-        text-decoration: none;
-      }
-
-      nav ul li a:hover {
-        color: #f00;
-      }
-      nav img {
-        height: 80px; /* Anpassa höjden till navbarens höjd */
-        padding: 10px;
-      }
+     
     </style>
   </head>
   <body>
@@ -135,7 +94,7 @@
         </ul>
       </nav>
     </header>
-    <div class="container text-center">
+    <main>
       <form th:action="@{/login}" method="post">
         <h3>Log in</h3>
         <!-- Show Error -->
@@ -186,6 +145,7 @@
           </div>
         </div>
       </form>
-    </div>
+    </main>
+    <div th:replace="~{footer :: footer}"></div>
   </body>
 </html>
