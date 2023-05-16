@@ -24,7 +24,6 @@
           <tbody>
             <tr th:each="rat : ${ratList}">
               <td th:text="${rat.name}"></td>
-              <td th:text="${rat.age}"></td>
               <td>
                 <button th:data-url="@{/rat/{id}(id=${rat.id})}"
                         class="goto-rat-btn">Gå till {{rat.name}}</button>
