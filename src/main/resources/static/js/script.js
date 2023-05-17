@@ -1,39 +1,24 @@
 $(document).ready(function () {
-  $("#add-treatment-form").submit(function (e) {
-    e.preventDefault();
-    var form = $(this);
-    var url = form.attr("action");
-    $.ajax({
-      type: "POST",
-      url: url,
-      data: form.serialize(),
-      success: function (data) {
-        // Uppdatera tabellen med nya behandlingar här
-        alert(data); // Visa meddelande om att behandlingen har lagts till
-      },
-      error: function (xhr, status, error) {
-        alert("Error: " + error); // Visa felmeddelande om det uppstår ett problem
-      },
-    });
-  });
-
   // Hämta referensen till elementen
-  var overlay = $(".overlay");
+var overlay = $(".overlay");
   var overlayContent = $(".overlay-content");
-  var gotoRatBtn = $(".goto-rat-btn");
 
   // Göm overlay som standard
   overlay.hide();
 
-  // Klickhändelse för att visa den synliga rutan
-  gotoRatBtn.click(function () {
+  $(".goto-rat-btn").click(function () {
+    var name = $(this).data("name");
+    var age = $(this).data("age");
+
+    $("#rat-name").text(name);
+    $("#rat-age").text(age);
+
     overlay.show();
   });
 
-  // Klickhändelse för att gömma den synliga rutan när man klickar på det synliga området
-  overlay.click(function (event) {
-    if (event.target === overlay[0]) {
-      overlay.hide();
+  $(".overlay").click(function (event) {
+    if (event.target === this) {
+      $(this).hide();
     }
   });
 

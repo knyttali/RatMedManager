@@ -11,6 +11,7 @@ main, footer {
   align-items: center; /* Vertikal centrering */
 }
 main {
+  width: auto;
   flex-grow: 1; /* make the main section expand to fill remaining space */
 }
 
@@ -65,6 +66,78 @@ nav a:hover {
 .active {
   text-decoration: underline;
 }
+
+
+/* mina råttor */
+section.myrats-section {
+  margin-top: 20px;
+}
+
+section.myrats-section h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.rat-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.rat-item {
+  width: 200px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.rat-image {
+  height: 100px;
+  width: auto;
+}
+
+.rat-image img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+.rat-details {
+  margin-top: 10px;
+}
+
+.rat-details h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.rat-details p {
+  font-size: 14px;
+}
+
+.rat-overlay {
+  display: none;
+}
+
+.goto-rat-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.goto-rat-btn:hover {
+  background-color: #45a049;
+}
+
+
+
 
 /* popup råttans profil */
 .overlay {

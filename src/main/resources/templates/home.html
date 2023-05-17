@@ -14,24 +14,34 @@
       </section>
       <section class="myrats-section hidden">
         <h1>Mina Råttor</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Namn</th>
-              <th>Ålder</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="rat : ${ratList}">
-              <td th:text="${rat.name}"></td>
-              <td>
-                <button th:data-url="@{/rat/{id}(id=${rat.id})}"
-                        class="goto-rat-btn">Gå till {{rat.name}}</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="rat-container">
+          <div th:each="rat : ${ratList}" class="rat-item">
+            <div class="rat-image">
+              <img th:src="@{/static/images/ratprofile.PNG}" alt="Logo" />
+            </div>
+            <div class="rat-details">
+              <h3 th:text="${rat.name}"></h3>
+              <p>Ålder: <span th:text="${rat.age}"></span></p>
+            </div>
+            <button
+              class="goto-rat-btn"
+              th:data-name="${rat.name}"
+              th:data-age="${rat.age}"
+            >
+              Profil
+            </button>
+            <!-- råttans profil -->
+            <div class="overlay">
+              <div class="overlay-content">
+                <h2>Information om råttan</h2>
+                <p>Namn: <span id="rat-name" th:text="${rat.name}"></span></p>
+                <p>Ålder: <span id="rat-age" th:text="${rat.age}"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
+
       <section class="add-rat-section hidden">
         <h1>Add Rat</h1>
         <form
@@ -48,19 +58,15 @@
         </form>
       </section>
       <section class="logout-section hidden">
-          <h1>Vill du logga ut?</h1>
-  
-          <form method="post" th:action="@{/logout}">
-            <input type="submit" value="Logout" />
-          </form>
+        <h1>Vill du logga ut?</h1>
+
+        <form method="post" th:action="@{/logout}">
+          <input type="submit" value="Logout" />
+        </form>
       </section>
     </main>
     <div th:replace="~{footer :: footer}"></div>
-    <!-- råttans profil -->
-    <div class="overlay">
-      <div class="overlay-content">
-        <h2>råttans profil</h2>
-      </div>
-    </div>
+
     <script src="/static/js/script.js"></script>
   </body>
+</html>
