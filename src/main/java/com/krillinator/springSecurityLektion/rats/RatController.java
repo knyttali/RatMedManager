@@ -45,8 +45,6 @@ public class RatController {
         }
         return "home";
     }
-    
-
 
     @PostMapping("/add-rat")
     public String addRat(@ModelAttribute Rat rat, Authentication authentication, Model model) {
@@ -69,6 +67,8 @@ public class RatController {
         model.addAttribute("rat", new Rat());
         return "home :: add-rat-section";
     }
+
+    
 
     // Visa formuläret för att lägga till en behandling för en råtta
     @GetMapping("/rats/{id}/add-treatment")

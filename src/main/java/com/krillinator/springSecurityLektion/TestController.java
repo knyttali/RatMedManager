@@ -29,7 +29,7 @@ public class TestController {
     }
 
     @GetMapping("/register")
-    public String displayRegisterUser(UserModel userModel) { // THIS ARGUMENT MUST EXIST
+    public String displayRegisterUser(UserModel userModel) { 
 
         return "register";
     }
@@ -58,12 +58,12 @@ public class TestController {
         // IF no errors
         System.out.println(userModel);
         userModelRepository.save(userModel);
-        // model.addAttribute("user", userModel);
+        /* testar detta för ett konstigt error... */
+        model.addAttribute("userModel", new UserModel());
 
-        return "home";
+        return "redirect:/home";
     }
 
-    /* Rats */
 
     @GetMapping("/")
     public String home(Model model) {

@@ -76,6 +76,7 @@ section.myrats-section {
 section.myrats-section h1 {
   font-size: 24px;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .rat-container {
@@ -89,11 +90,16 @@ section.myrats-section h1 {
   background-color: #f9f9f9;
   padding: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .rat-image {
   height: 100px;
   width: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .rat-image img {
@@ -104,7 +110,9 @@ section.myrats-section h1 {
 
 
 .rat-details {
-  margin-top: 10px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 .rat-details h3 {
@@ -114,10 +122,6 @@ section.myrats-section h1 {
 
 .rat-details p {
   font-size: 14px;
-}
-
-.rat-overlay {
-  display: none;
 }
 
 .goto-rat-btn {
@@ -155,7 +159,81 @@ section.myrats-section h1 {
 }
 
 .overlay-content {
+  width: 60%;
+  background-color: #fff;
   padding: 20px;
-  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
+.rat-image-profile img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.overlay-content h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.overlay-content p {
+  color: #666;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.edit-rat-btn {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit-rat-btn:hover {
+  background-color: #5dc160;
+}
+.edit-rat-btn:active {
+  background-color: #4ea451;
+}
+
+
+/* lägg till råtta */
+.add-rat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add-rat-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add-rat-content form input{
+  margin: 5px 0;
+}
+.add-rat-content form label{
+  margin-top: 5px;
+}
+.add-rat-content button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.add-rat-content button:hover {
+  background-color: #5dc160;
+}
+.add-rat-content button:active {
+  background-color: #4ea451;
+}
