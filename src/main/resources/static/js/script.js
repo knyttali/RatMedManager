@@ -1,23 +1,24 @@
 $(document).ready(function () {
   // Hämta referensen till elementen
-var overlay = $(".overlay");
+
+  var overlay = $(".overlay");
   var overlayContent = $(".overlay-content");
 
-  // Göm overlay som standard
   overlay.hide();
 
   $(".goto-rat-btn").click(function () {
-    var name = $(this).data("name");
-    var age = $(this).data("age");
-
-    $("#rat-name").text(name);
-    $("#rat-age").text(age);
-
+    var name = $(this).siblings(".rat-details").find("h3").text();
+    var age = $(this).siblings(".rat-details").find("span").text();
+  
+    overlayContent.find("#rat-name").text(name);
+    overlayContent.find("#rat-age").text(age);
+  
     overlay.show();
   });
 
+  /* stäng profilen */
   $(".overlay").click(function (event) {
-    if (event.target === this) {
+    if ($(event.target).hasClass("overlay")) {
       $(this).hide();
     }
   });
