@@ -4,20 +4,19 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.krillinator.springSecurityLektion.Meds.Medication;
-import com.krillinator.springSecurityLektion.Meds.TreatmentForm;
+
+import com.krillinator.springSecurityLektion.Meds.Diagnos;
+import com.krillinator.springSecurityLektion.Meds.DiagnosRepository;
 import com.krillinator.springSecurityLektion.user.UserModel;
 import com.krillinator.springSecurityLektion.user.UserModelRepository;
 import com.krillinator.springSecurityLektion.user.UserModelService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RatController {
@@ -25,12 +24,15 @@ public class RatController {
     private final RatService ratService;
     private final UserModelService userService;
     private final UserModelRepository userRepository;
+    private final DiagnosRepository diagnosRepository;
 
     @Autowired
-    public RatController(RatService ratService, UserModelService userService, UserModelRepository userRepository) {
+    public RatController(RatService ratService, UserModelService userService, UserModelRepository userRepository,
+            DiagnosRepository diagnosRepository) {
         this.ratService = ratService;
         this.userService = userService;
         this.userRepository = userRepository;
+        this.diagnosRepository = diagnosRepository;
     }
 
     @GetMapping("/home")
@@ -68,36 +70,28 @@ public class RatController {
         return "home :: add-rat-section";
     }
 
+
     
-
-    // Visa formuläret för att lägga till en behandling för en råtta
-    @GetMapping("/rats/{id}/add-treatment")
-    public String showAddTreatmentForm(@PathVariable Long id, Model model) {
-        Rat rat = ratService.getRatById(id);
-        TreatmentForm treatmentForm = new TreatmentForm();
-        treatmentForm.setRatId(rat.getId());
-        model.addAttribute("treatmentForm", treatmentForm);
-        model.addAttribute("rat", rat);
-        return "treatment-form";
+    @GetMapping("/add-diagnos")
+    public String showAddDiagnosForm(Model model, @RequestParam("ratId") Long ratId) {
+        Rat rat = ratService.getRatById(ratId);
+        if (rat != null) {
+            Diagnos diagnos = new Diagnos();
+            diagnos.setRat(rat);
+            model.addAttribute("diagnos", diagnos);
+        }
+        return "add-diagnos";
     }
 
-    @PostMapping("/rats/{id}/add-treatment")
-    @ResponseBody
-    public ResponseEntity<String> addTreatment(@PathVariable Long id, @ModelAttribute TreatmentForm form) {
-        Rat rat = ratService.getRatById(id);
-        Medication medication = new Medication(form.getMedication(), form.getMedication());
-        medication.setRat(rat);
-        rat.getMedications().add(medication);
-        ratService.saveRat(rat);
-        return ResponseEntity.ok().body("Medication added successfully");
-    }
-
-    /* visa råttans treatments */
-    @GetMapping("/rats/{id}/treatments")
-    public String showTreatments(@PathVariable Long id, Model model) {
-        Rat rat = ratService.getRatById(id);
-        model.addAttribute("rat", rat);
-        return "treatments";
+    @PostMapping("/add-diagnos")
+    public String addDiagnos(@ModelAttribute("diagnos") Diagnos diagnos, @RequestParam("ratId") Long ratId) {
+        Rat rat = ratService.getRatById(ratId);
+        if (rat != null) {
+            diagnos.setRat(rat);
+            rat.getDiagnoser().add(diagnos);
+            diagnosRepository.save(diagnos);
+        }
+        return "redirect:/home";
     }
 
 }

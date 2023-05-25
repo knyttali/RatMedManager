@@ -3,9 +3,9 @@ package com.krillinator.springSecurityLektion.rats;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.krillinator.springSecurityLektion.Meds.Medication;
+import com.krillinator.springSecurityLektion.Meds.Diagnos;
 import com.krillinator.springSecurityLektion.user.UserModel;
-
+ 
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,16 +23,17 @@ public class Rat {
     @Column
     private int age;
     /* medicinsk info */
-    @OneToMany(mappedBy = "rat", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Medication> medications = new ArrayList<>();
+    @OneToMany(mappedBy = "rat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Diagnos> diagnoser;
     /* ägare */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private UserModel owner;
 
     public Rat(String name, int age) {
-        this.name = name;
+        this.name = name; 
         this.age = age;
+        this.diagnoser = new ArrayList<>();
     }
 }
 

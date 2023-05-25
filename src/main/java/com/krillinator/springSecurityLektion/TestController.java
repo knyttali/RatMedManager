@@ -69,6 +69,11 @@ public class TestController {
     public String home(Model model) {
         return "home";
     }
+
+    @GetMapping("/error-page")
+    public String errorPage(){
+        return "error-page";
+    }
     
 
 }

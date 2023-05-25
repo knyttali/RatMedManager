@@ -3,20 +3,41 @@ $(document).ready(function () {
 
   var overlay = $(".overlay");
   var overlayContent = $(".overlay-content");
-
+  var ratId;
   overlay.hide();
 
+  if (ratId) {
+    paragrafElement.text("Råttans ID: " + ratId);
+  }
+
+  /* klickhändelse för att gå till edit-rat-sidan */
+  $("a.add-diagnos-link").click(function () {
+    var ratId = $(this).data("ratId");
+    window.location.href = '/add-diagnos?ratId=' + ratId;
+});
+
+
+
+
   $(".goto-rat-btn").click(function () {
-    var name = $(this).siblings(".rat-details").find("h3").text();
-    var age = $(this).siblings(".rat-details").find("span").text();
+    var ratItem = $(this).closest(".rat-item"); //
+    var name = ratItem.find(".rat-details h3").text();
+    var age = ratItem.find(".rat-details span").text();
+    var ratId = ratItem.find("rat-details h4").text();
   
+  
+    showOverlay(name, age, ratId); // Visa overlay med råttans namn och ålder
+  });
+  
+  function showOverlay(name, age, ratId) {
     overlayContent.find("#rat-name").text(name);
     overlayContent.find("#rat-age").text(age);
+    overlayContent.find("#rat-id").text(ratId);
   
     overlay.show();
-  });
-
-  /* stäng profilen */
+  }
+  
+  /* stäng profilen */ 
   $(".overlay").click(function (event) {
     if ($(event.target).hasClass("overlay")) {
       $(this).hide();

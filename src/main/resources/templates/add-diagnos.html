@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ny Diagnos</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form th:action="@{/add-diagnos}" method="post" th:object="${diagnos}">
+        <p><b>Namn:</b> <span th:text="${diagnos.rat.name}"></span></p>
+        <input type="text" th:field="${diagnos.namn}" placeholder="Diagnosnamn" />
+        <input type="text" th:field="${diagnos.datum}" placeholder="Datum" />
+        <input type="text" th:field="${diagnos.beskrivning}" placeholder="Beskrivning" />
+        <button type="submit">Lägg till diagnos</button>
+      </form>
+      
+    <div id="utskrift"></div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

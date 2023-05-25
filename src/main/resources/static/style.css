@@ -2,17 +2,23 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin: 0; 
+  margin: 0;
   padding: 0;
 }
-main, footer {
+
+main,
+footer {
   display: flex;
-  justify-content: center; /* Horisontell centrering */
-  align-items: center; /* Vertikal centrering */
+  justify-content: center;
+  /* Horisontell centrering */
+  align-items: center;
+  /* Vertikal centrering */
 }
+
 main {
   width: auto;
-  flex-grow: 1; /* make the main section expand to fill remaining space */
+  flex-grow: 1;
+  /* make the main section expand to fill remaining space */
 }
 
 .hidden {
@@ -151,8 +157,10 @@ section.myrats-section h1 {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center; /* Centrera horisontellt */
-  align-items: center; /* Centrera vertikalt */
+  justify-content: center;
+  /* Centrera horisontellt */
+  align-items: center;
+  /* Centrera vertikalt */
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   z-index: 999;
@@ -200,6 +208,7 @@ section.myrats-section h1 {
 .edit-rat-btn:hover {
   background-color: #5dc160;
 }
+
 .edit-rat-btn:active {
   background-color: #4ea451;
 }
@@ -211,17 +220,21 @@ section.myrats-section h1 {
   flex-direction: column;
   align-items: center;
 }
+
 .add-rat-content form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.add-rat-content form input{
+
+.add-rat-content form input {
   margin: 5px 0;
 }
-.add-rat-content form label{
+
+.add-rat-content form label {
   margin-top: 5px;
 }
+
 .add-rat-content button {
   background-color: #4CAF50;
   color: #fff;
@@ -231,9 +244,11 @@ section.myrats-section h1 {
   font-size: 16px;
   cursor: pointer;
 }
+
 .add-rat-content button:hover {
   background-color: #5dc160;
 }
+
 .add-rat-content button:active {
   background-color: #4ea451;
 }

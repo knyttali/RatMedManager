@@ -20,16 +20,20 @@
               <img th:src="@{/static/images/ratprofile.PNG}" alt="Logo" />
             </div>
             <div class="rat-details">
+              <h4 th:text="${rat.id}"></h4>
               <h3 th:text="${rat.name}"></h3>
               <p class="hidden">Ålder: <span th:text="${rat.age}"></span></p>
             </div>
             <button
               class="goto-rat-btn"
+              th:data-ratId="${rat.id}"
               th:data-name="${rat.name}"
               th:data-age="${rat.age}"
+              th:data-diagnoser="${rat.diagnoser}"
             >
               Profil
             </button>
+            <a th:href="@{/add-diagnos(ratId=${rat.id})}" class="add-diagnos-link" data-ratId="${rat.id}">Lägg till diagnos</a>   
           </div>
           <!-- råttans profil -->
           <div class="overlay">
@@ -41,6 +45,7 @@
                 />
               </div>
               <h2><span id="rat-name"></span></h2>
+              <h3><span id="rat-id"></span></h3>
               <p>
                 <b>Personlighet:</b> Lorem ipsum dolor sit amet consectetur
                 adipisicing elit. Voluptate non a excepturi aperiam nesciunt
@@ -49,8 +54,7 @@
                 quas.
               </p>
               <p><b>Ålder:</b> <span id="rat-age"></span></p>
-              <p><b>Diagnoser:</b></p>
-              <button class="edit-rat-btn">Redigera</button>
+              <p><b>Diagnoser:</b></p>        
             </div>
           </div>
         </div>
@@ -101,5 +105,6 @@
       });
     </script>
     <script src="/static/js/script.js"></script>
+    <script src="/static/js/add-diagnos.js"></script>
   </body>
 </html>
