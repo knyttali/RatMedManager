@@ -33,7 +33,8 @@
             >
               Profil
             </button>
-            <a th:href="@{/add-diagnos(ratId=${rat.id})}" class="add-diagnos-link" data-ratId="${rat.id}">Lägg till diagnos</a>   
+            <a th:href="@{/add-diagnos(ratId=${rat.id})}" class="add-diagnos-link" th:data-ratId="${rat.id}">Lägg till diagnos</a>
+ 
           </div>
           <!-- råttans profil -->
           <div class="overlay">
@@ -70,9 +71,9 @@
             method="post"
           >
             <label for="name">Name:</label>
-            <input type="text" id="name" name="name" th:field="*{name}" />
+            <input type="text" name="name" th:field="*{name}" />
             <label for="age">Age:</label>
-            <input type="number" id="age" name="age" th:field="*{age}" />
+            <input type="number" name="age" th:field="*{age}" />
             <button type="submit">Add Rat</button>
           </form>
         </div>

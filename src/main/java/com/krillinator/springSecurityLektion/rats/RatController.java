@@ -70,28 +70,39 @@ public class RatController {
         return "home :: add-rat-section";
     }
 
-
-    
     @GetMapping("/add-diagnos")
     public String showAddDiagnosForm(Model model, @RequestParam("ratId") Long ratId) {
+        System.out.println("början av showAddDiagnosForm");
         Rat rat = ratService.getRatById(ratId);
+        System.out.println("hämtat råtta via ratId: " + rat);
+
         if (rat != null) {
             Diagnos diagnos = new Diagnos();
             diagnos.setRat(rat);
+            diagnos.setRatsId(rat.getId());
+            System.out.println("sparat råttan till diagnosen: " + diagnos);
+
             model.addAttribute("diagnos", diagnos);
         }
         return "add-diagnos";
     }
 
-    @PostMapping("/add-diagnos")
-    public String addDiagnos(@ModelAttribute("diagnos") Diagnos diagnos, @RequestParam("ratId") Long ratId) {
-        Rat rat = ratService.getRatById(ratId);
-        if (rat != null) {
-            diagnos.setRat(rat);
-            rat.getDiagnoser().add(diagnos);
-            diagnosRepository.save(diagnos);
-        }
-        return "redirect:/home";
-    }
+   
+      @PostMapping("/add-diagnos")
+      public String addDiagnos(@ModelAttribute("diagnos") Diagnos
+      diagnos, @RequestParam("ratId") Long ratId) {
+      System.out.println("början av postmappingen addDiagnos");
+      
+      Rat rat = ratService.getRatById(ratId);
+      if (rat != null) {
+      diagnos.setRat(rat);
+      rat.getDiagnoser().add(diagnos);
+      diagnosRepository.save(diagnos);
+      }
+      return "redirect:/home";
+      }
+     
+
+
 
 }

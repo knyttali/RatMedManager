@@ -18,6 +18,7 @@ public class Diagnos {
     private String namn;
     private String datum;
     private String beskrivning;
+    private Long ratsId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rat_id")
     private Rat rat;
