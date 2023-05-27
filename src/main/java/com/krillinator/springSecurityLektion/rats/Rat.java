@@ -22,6 +22,8 @@ public class Rat {
     private String name;
     @Column
     private int age;
+    @Column
+    private String personality;
     /* medicinsk info */
     @OneToMany(mappedBy = "rat", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Diagnos> diagnoser;

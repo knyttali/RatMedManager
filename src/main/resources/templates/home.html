@@ -5,6 +5,7 @@
     <title>RatMedManager</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
   </head>
   <body>
     <div th:replace="~{header :: header}"></div>
@@ -19,48 +20,41 @@
             <div class="rat-image">
               <img th:src="@{/static/images/ratprofile.PNG}" alt="Logo" />
             </div>
-            <div class="rat-details">
-              <h4 th:text="${rat.id}"></h4>
-              <h3 th:text="${rat.name}"></h3>
-              <p class="hidden">Ålder: <span th:text="${rat.age}"></span></p>
-            </div>
-            <button
-              class="goto-rat-btn"
-              th:data-ratId="${rat.id}"
-              th:data-name="${rat.name}"
-              th:data-age="${rat.age}"
-              th:data-diagnoser="${rat.diagnoser}"
-            >
-              Profil
-            </button>
-            <a th:href="@{/add-diagnos(ratId=${rat.id})}" class="add-diagnos-link" th:data-ratId="${rat.id}">Lägg till diagnos</a>
- 
-          </div>
-          <!-- råttans profil -->
-          <div class="overlay">
-            <div class="overlay-content">
-              <div class="rat-image-profile">
-                <img
-                  th:src="@{/static/images/ratprofile2.PNG}"
-                  alt="Rat Profile"
-                />
-              </div>
-              <h2><span id="rat-name"></span></h2>
-              <h3><span id="rat-id"></span></h3>
-              <p>
-                <b>Personlighet:</b> Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Voluptate non a excepturi aperiam nesciunt
-                laborum eaque veritatis, quae eligendi deleniti enim odit
-                reiciendis dolor quaerat deserunt minima tempora voluptatem
-                quas.
-              </p>
-              <p><b>Ålder:</b> <span id="rat-age"></span></p>
-              <p><b>Diagnoser:</b></p>        
+            <h2><span th:text="${rat.name}"></span></h2>
+            <p>
+              <b>Personlighet:</b> <span th:text="${rat.personality}"></span>
+            </p>
+            <p><b>Ålder:</b> <span th:text="${rat.age}"></span></p>
+            <h2>Diagnoser:</h2>
+        <table class="diagnos-table">
+          <thead>
+            <tr>
+              <th>Diagnos</th>
+              <th>Datum</th>
+              <th>Beskrivning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="diagnos : ${rat.diagnoser}">
+              <td th:text="${diagnos.namn}"></td>
+              <td th:text="${diagnos.datum}"></td>
+              <td th:text="${diagnos.beskrivning}"></td>
+            </tr>
+          </tbody>
+        </table>   
+        <button class="edit-rat-btn">
+           <a
+            th:href="@{/add-diagnos(ratId=${rat.id})}"
+            class="add-diagnos-link"
+            th:data-ratId="${rat.id}"
+            >Lägg till diagnos</a
+          >
+        </button>   
+           
             </div>
           </div>
         </div>
       </section>
-
       <section class="add-rat-section hidden">
         <div class="add-rat-content">
           <h1>Add Rat</h1>
@@ -70,20 +64,21 @@
             th:object="${rat}"
             method="post"
           >
-            <label for="name">Name:</label>
+            <label for="name">Namn:</label>
             <input type="text" name="name" th:field="*{name}" />
-            <label for="age">Age:</label>
+            <label for="age">Ålder:</label>
             <input type="number" name="age" th:field="*{age}" />
-            <button type="submit">Add Rat</button>
+            <label for="personality">Personlighet:</label>
+            <input type="text" name="personality" th:field="*{personality}" />
+            <button type="submit">Spara</button>
           </form>
         </div>
       </section>
-      <section class="logout-section hidden">
-        <h1>Vill du logga ut?</h1>
 
-        <form method="post" th:action="@{/logout}">
-          <input type="submit" value="Logout" />
-        </form>
+
+
+      <section class="logout-section hidden">
+        <div th:replace="fragments/logout :: logout-fragment"></div>
       </section>
     </main>
     <div th:replace="~{footer :: footer}"></div>
@@ -105,7 +100,6 @@
         nameInput.value = capitalized;
       });
     </script>
-    <script src="/static/js/script.js"></script>
-    <script src="/static/js/add-diagnos.js"></script>
+    <script src="/static/js/script.js"></script> 
   </body>
 </html>

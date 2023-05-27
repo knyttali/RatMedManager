@@ -2,13 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ny Diagnos</title>
+    <title>RatMedManager</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
+    <header>
+      <nav>
+        <img th:src="@{/static/images/rats3.jpg}" alt="Logo" />
+        <ul>
+          <li><a th:href="@{/home}" class="myrats-btn">Home (hoppas på Mina Råttor, men tar det sen isåfall)</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
     <form
       action="#"
       th:action="@{/add-diagnos}"
@@ -25,8 +32,28 @@
       <input type="text" name="beskrivning" th:field="*{beskrivning}" />
       <button type="submit">Submit</button>
     </form>
-
-    <div id="utskrift"></div>
+ 
+    <div id="utskrift">
+      <h2>Diagnoser:</h2>
+      <table class="diagnos-table">
+        <thead>
+          <tr>
+            <th>Namn</th>
+            <th>Datum</th>
+            <th>Beskrivning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="diagnos : ${diagnos.rat.diagnoser}">
+            <td th:text="${diagnos.namn}"></td>
+            <td th:text="${diagnos.datum}"></td>
+            <td th:text="${diagnos.beskrivning}"></td>
+          </tr>
+        </tbody>
+      </table>      
+    </div>
+  </main>
+    <div th:replace="~{footer :: footer}"></div>
     <script src="/static/js/script.js"></script>
   </body>
 </html>
