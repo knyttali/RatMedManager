@@ -19,11 +19,12 @@ main {
   width: auto;
   flex-grow: 1;
   /* make the main section expand to fill remaining space */
+  flex-direction: column;
 }
 
 .hidden {
   display: none;
-  
+
 }
 
 /* header */
@@ -86,22 +87,19 @@ section.myrats-section h1 {
   text-align: center;
 }
 
-.rat-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
 .rat-item {
-  width: 200px;
+  width: 400px;
   background-color: #f9f9f9;
   padding: 10px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin-bottom: 30px;
 }
 
+/* .ratitem-sanstable  {
+  flex-direction: column;
+}
+ */
 .rat-image {
   height: 100px;
   width: auto;
@@ -115,45 +113,63 @@ section.myrats-section h1 {
   object-fit: contain;
 }
 
-
-.rat-details {
-  margin-top: 5px;
+.diagnos-form {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
 }
 
-.rat-details h3 {
-  font-size: 18px;
-  margin-bottom: 5px;
+.diagnos-table {
+  flex-direction: column;
+  margin: 20px;
+  margin: 0 20px 20px 50px;
 }
 
-.rat-details p {
-  font-size: 14px;
+.diagnos-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px
 }
 
-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  cursor: pointer;
+.diagnos-table table th,
+.diagnos-table table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ccc;
 }
 
-button:hover {
-  background-color: #45a049;
+.diagnos-table table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.diagnos-table table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.diagnos-table table tr:hover {
+  background-color: #e3e3e3;
 }
 
 
-button a {
-  text-decoration: none;
-}
+@media (max-width: 600px) {
+  .rat-item {
+    flex-direction: column;
+  }
 
-button:active {
-  background-color: #4ea451;
+  .ratitem-sanstable {
+    display: flex;
+  }
+
+  .rat-details {}
+
+  .rat-image {
+    align-items: center;
+  }
+
+  .diagnos-table table {
+    width: 100%;
+    overflow-x: auto;
+  }
 }
 
 
@@ -178,7 +194,7 @@ button:active {
   margin-top: 5px;
 }
 
-.add-rat-content button {
+button {
   background-color: #4CAF50;
   color: #fff;
   border: none;
@@ -186,14 +202,24 @@ button:active {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
-.add-rat-content button:hover {
+button:hover {
   background-color: #5dc160;
 }
 
-.add-rat-content button:active {
+button:active {
   background-color: #4ea451;
+}
+
+button a {
+  text-decoration: none;
+  color: white;
+}
+
+.edit-rat-btn {
+  margin-top: auto;
 }
 
 
@@ -227,3 +253,11 @@ button:active {
 .diagnos-lista li .diagnos-beskrivning {
   color: #ffa500;
 }
+
+
+
+/* lägg till diagnos */
+#utskrift {
+  margin: 20px 0;
+}
+

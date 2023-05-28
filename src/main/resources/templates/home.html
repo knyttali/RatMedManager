@@ -5,7 +5,6 @@
     <title>RatMedManager</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-   
   </head>
   <body>
     <div th:replace="~{header :: header}"></div>
@@ -15,49 +14,54 @@
       </section>
       <section class="myrats-section hidden">
         <h1>Mina Råttor</h1>
-        <div class="rat-container">
+        <div class="rat-wrapper">
           <div th:each="rat : ${ratList}" class="rat-item">
-            <div class="rat-image">
-              <img th:src="@{/static/images/ratprofile.PNG}" alt="Logo" />
+            <div class="ratitem-sanstable">
+              <div class="rat-image">
+                <img th:src="@{/static/images/ratprofile.PNG}" alt="Logo" />
+              </div>
+              <div class="rat-details">
+                <h2><span th:text="${rat.name}"></span></h2>
+                <p>
+                  <b>Personlighet:</b>
+                  <span th:text="${rat.personality}"></span>
+                </p>
+                <p><b>Ålder:</b> <span th:text="${rat.age}"></span></p>
+              </div>
             </div>
-            <h2><span th:text="${rat.name}"></span></h2>
-            <p>
-              <b>Personlighet:</b> <span th:text="${rat.personality}"></span>
-            </p>
-            <p><b>Ålder:</b> <span th:text="${rat.age}"></span></p>
-            <h2>Diagnoser:</h2>
-        <table class="diagnos-table">
-          <thead>
-            <tr>
-              <th>Diagnos</th>
-              <th>Datum</th>
-              <th>Beskrivning</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="diagnos : ${rat.diagnoser}">
-              <td th:text="${diagnos.namn}"></td>
-              <td th:text="${diagnos.datum}"></td>
-              <td th:text="${diagnos.beskrivning}"></td>
-            </tr>
-          </tbody>
-        </table>   
-        <button class="edit-rat-btn">
-           <a
-            th:href="@{/add-diagnos(ratId=${rat.id})}"
-            class="add-diagnos-link"
-            th:data-ratId="${rat.id}"
-            >Lägg till diagnos</a
-          >
-        </button>   
-           
+            <div class="diagnos-table">
+              <h2>Diagnoser:</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Diagnos</th>
+                    <th>Datum</th>
+                    <th>Beskrivning</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="diagnos : ${rat.diagnoser}">
+                    <td th:text="${diagnos.namn}"></td>
+                    <td th:text="${diagnos.datum}"></td>
+                    <td th:text="${diagnos.beskrivning}"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="edit-rat-btn">
+                <a
+                  th:href="@{/add-diagnos(ratId=${rat.id})}"
+                  class="add-diagnos-link"
+                  th:data-ratId="${rat.id}"
+                  >Lägg till diagnos</a
+                >
+              </button>
             </div>
           </div>
         </div>
       </section>
       <section class="add-rat-section hidden">
         <div class="add-rat-content">
-          <h1>Add Rat</h1>
+          <h1>Lägg till råtta</h1>
           <form
             action="#"
             th:action="@{/add-rat}"
@@ -74,8 +78,6 @@
           </form>
         </div>
       </section>
-
-
 
       <section class="logout-section hidden">
         <div th:replace="fragments/logout :: logout-fragment"></div>
@@ -100,6 +102,6 @@
         nameInput.value = capitalized;
       });
     </script>
-    <script src="/static/js/script.js"></script> 
+    <script src="/static/js/script.js"></script>
   </body>
 </html>

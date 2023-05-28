@@ -11,19 +11,21 @@
       <nav>
         <img th:src="@{/static/images/rats3.jpg}" alt="Logo" />
         <ul>
-          <li><a th:href="@{/home}" class="myrats-btn">Home (hoppas på Mina Råttor, men tar det sen isåfall)</a></li>
+          <li><a th:href="@{/home}" class="myrats-btn">Home</a></li>
         </ul>
       </nav>
     </header>
     <main>
+      <h1><span th:text="${diagnos.rat.name}"></span></h1>
+      <div class="add-diagnos-content">
     <form
       action="#"
       th:action="@{/add-diagnos}"
       method="post"
       th:object="${diagnos}"
+      class="diagnos-form"
     >
       <input type="hidden" name="ratId" th:value="${diagnos.rat.id}" />
-      <p><b>Namn:</b> <span th:text="${diagnos.rat.name}"></span></p>
       <label for="namn">Diagnos:</label>
       <input type="text" name="namn" th:field="*{namn}" />
       <label for="datum">Datum:</label>
@@ -33,12 +35,11 @@
       <button type="submit">Submit</button>
     </form>
  
-    <div id="utskrift">
-      <h2>Diagnoser:</h2>
-      <table class="diagnos-table">
+    <div id="utskrift" class="diagnos-table">
+      <table >
         <thead>
           <tr>
-            <th>Namn</th>
+            <th>Diagnos</th>
             <th>Datum</th>
             <th>Beskrivning</th>
           </tr>
@@ -52,6 +53,7 @@
         </tbody>
       </table>      
     </div>
+  </div>
   </main>
     <div th:replace="~{footer :: footer}"></div>
     <script src="/static/js/script.js"></script>
