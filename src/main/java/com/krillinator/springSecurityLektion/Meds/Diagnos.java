@@ -1,5 +1,8 @@
 package com.krillinator.springSecurityLektion.Meds;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.krillinator.springSecurityLektion.rats.Rat;
 
 import jakarta.persistence.*;
@@ -21,6 +24,8 @@ public class Diagnos {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rat_id")
     private Rat rat;
+    @OneToMany(mappedBy = "diagnos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Medicin> mediciner;
 
     public Diagnos(String namn, String datum, String beskrivning) {
         this.namn = namn;

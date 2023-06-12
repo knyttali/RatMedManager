@@ -11,6 +11,7 @@
     <main>
       <section class="main-section">
         <h1>Välkommen!</h1>
+        <div th:replace="fragments/checklist :: checklist-fragment"></div>
       </section>
       <section class="myrats-section hidden">
         <h1>Mina Råttor</h1>
@@ -78,7 +79,6 @@
           </form>
         </div>
       </section>
-
       <section class="logout-section hidden">
         <div th:replace="fragments/logout :: logout-fragment"></div>
       </section>

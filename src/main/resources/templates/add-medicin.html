@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>RatMedManager</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <img th:src="@{/static/images/rats3.jpg}" alt="Logo" />
+        <ul>
+          <li><a th:href="@{/home}" class="myrats-btn">Home</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1><span th:text="${medicin.diagnos.rat.name} + ' - ' + ${medicin.diagnos.namn}"></span></h1>
+      <div class="add-medicin-content">
+        <form
+          action="#"
+          th:action="@{/add-medicin}"
+          method="post"
+          th:object="${medicin}"
+          class="diagnos-form"
+        >
+          <input type="hidden" name="diagnosId" th:value="${medicin.diagnos.id}" />
+          <label for="namn">Medicin:</label>
+          <input type="text" name="namn" th:field="*{namn}" />
+          <label for="dosering">Dosering:</label>
+          <input type="text" name="dosering" th:field="*{dosering}" />
+
+
+          <button type="submit">Submit</button>
+        </form>
+
+        <div id="utskrift" class="diagnos-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Medicin</th>
+                <th>Dosering</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="medicin : ${medicin.diagnos.mediciner}">
+                <td th:text="${medicin.namn}"></td>
+                <td th:text="${medicin.dosering}"></td>
+              </tr>
+            </tbody>
+          </table>          
+      </div>
+    </main>
+    <div th:replace="~{footer :: footer}"></div>
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.krillinator.springSecurityLektion.Meds.Diagnos;
+import com.krillinator.springSecurityLektion.Meds.Medicin;
 import com.krillinator.springSecurityLektion.user.UserModel;
  
 import jakarta.persistence.*;

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.krillinator.springSecurityLektion.Meds.Diagnos;
 import com.krillinator.springSecurityLektion.Meds.DiagnosRepository;
+import com.krillinator.springSecurityLektion.Meds.Medicin;
+import com.krillinator.springSecurityLektion.Meds.MedicinRepository;
 import com.krillinator.springSecurityLektion.user.UserModel;
 import com.krillinator.springSecurityLektion.user.UserModelRepository;
 import com.krillinator.springSecurityLektion.user.UserModelService;
@@ -25,29 +27,30 @@ public class RatController {
     private final UserModelService userService;
     private final UserModelRepository userRepository;
     private final DiagnosRepository diagnosRepository;
+    private final MedicinRepository medicinRepository;
 
     @Autowired
     public RatController(RatService ratService, UserModelService userService, UserModelRepository userRepository,
-            DiagnosRepository diagnosRepository) {
+            DiagnosRepository diagnosRepository, MedicinRepository medicinRepository) {
         this.ratService = ratService;
         this.userService = userService;
         this.userRepository = userRepository;
         this.diagnosRepository = diagnosRepository;
+        this.medicinRepository = medicinRepository;
     }
 
     @GetMapping("/home")
-public String home(Model model, Authentication auth) {
-    String username = auth.getName();
-    Optional<UserModel> userOptional = userRepository.findByUsername(username);
-    if (userOptional.isPresent()) {
-        UserModel user = userOptional.get();
-        List<Rat> ratList = user.getRats();
-        model.addAttribute("ratList", ratList);
-        model.addAttribute("rat", new Rat());
+    public String home(Model model, Authentication auth) {
+        String username = auth.getName();
+        Optional<UserModel> userOptional = userRepository.findByUsername(username);
+        if (userOptional.isPresent()) {
+            UserModel user = userOptional.get();
+            List<Rat> ratList = user.getRats();
+            model.addAttribute("ratList", ratList);
+            model.addAttribute("rat", new Rat());
+        }
+        return "home";
     }
-    return "home";
-}
-
 
     @PostMapping("/add-rat")
     public String addRat(@ModelAttribute Rat rat, Authentication authentication, Model model) {
@@ -95,6 +98,33 @@ public String home(Model model, Authentication auth) {
             diagnosRepository.save(diagnos);
         }
         return "add-diagnos";
+    }
+
+    @GetMapping("/add-medicin")
+    public String showAddMedicinForm(Model model, @RequestParam("diagnosId") Long diagnosId) {
+        Optional<Diagnos> diagnosOptional = diagnosRepository.findById(diagnosId);
+
+        if (diagnosOptional.isPresent()) {
+            Diagnos diagnos = diagnosOptional.get();
+            Medicin medicin = new Medicin();
+            medicin.setDiagnos(diagnos);
+            model.addAttribute("medicin", medicin);
+            model.addAttribute("diagnos", diagnos);
+        }
+        return "add-medicin";
+    }
+
+    @PostMapping("/add-medicin")
+    public String addMedicin(@ModelAttribute("medicin") Medicin medicin, @RequestParam("diagnosId") Long diagnosId) {
+        System.out.println("början av postmappingen addMedicin");
+
+        Diagnos diagnos = diagnosRepository.findById(diagnosId).orElse(null);
+        if (diagnos != null) {
+            medicin.setDiagnos(diagnos);
+            diagnos.getMediciner().add(medicin);
+            medicinRepository.save(medicin);
+        }
+        return "add-medicin";
     }
 
 }

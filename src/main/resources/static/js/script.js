@@ -1,14 +1,18 @@
-function showMyRats() {
-  
-}
+
 $(document).ready(function () {
   // Hämta referensen till elementen
   var ratId;
+  var diagnosId;
 
   /* klickhändelse för att gå till edit-rat-sidan */
   $("a.add-diagnos-link").click(function () {
     var ratId = $(this).data("ratId");
     window.location.href = "/add-diagnos?ratId=" + ratId;
+  });
+  /* klickhändelse för att gå till edit-rat-sidan */
+  $("a.add-medicin-link").click(function () {
+    var diagnosId = $(this).data("diagnosId");
+    window.location.href = "/add-medicin?diagnosId=" + diagnosId;
   });
 
   // Klickhändelse för att byta sektioner
@@ -40,3 +44,15 @@ $(document).ready(function () {
     }
   }
 });
+
+function toggleMedicinStatus(medicinId) {
+  // Hämta elementet för medicinen med hjälp av medicinId
+  var medicinElement = document.getElementById(medicinId.toString());
+
+  // Om medicinen är markerad (har klassen 'completed'), ta bort klassen, annars lägg till klassen
+  if (medicinElement.classList.contains('completed')) {
+    medicinElement.classList.remove('completed');
+  } else {
+    medicinElement.classList.add('completed');
+  }
+}

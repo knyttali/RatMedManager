@@ -261,3 +261,9 @@ button a {
   margin: 20px 0;
 }
 
+
+/* checklista */
+.completed {
+  text-decoration: line-through;
+}
+
